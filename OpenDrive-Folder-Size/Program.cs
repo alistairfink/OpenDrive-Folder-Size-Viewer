@@ -10,20 +10,19 @@ namespace OpenDrive_Folder_Size
 {
     class Program
     {
-        private static string SessionID;
         static void Main(string[] args)
         {
-            SessionID = "11111111";
-            if (!CheckLogin())
+            string SessionID = "11111111";
+            if (!CheckLogin(SessionID))
             {
-                while (!Login()) { }
+                while (!Login(out SessionID)) { }
             }
             while(true)
             {
                 
             }
         }
-        private static bool Login()
+        private static bool Login(out string SessionID)
         {
             using (HttpClient client = new HttpClient())
             {
@@ -37,13 +36,24 @@ namespace OpenDrive_Folder_Size
                 JObject json = JObject.Parse(jsonString);
                 var content = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
                 var result = client.PostAsync(url, content).Result;
+                Console.WriteLine("Logging in...");
                 string resultString = result.Content.ReadAsStringAsync().Result;
                 JObject jsonResponse = JObject.Parse(resultString);
-
+                if (jsonResponse.TryGetValue("error", out JToken response))
+                {
+                    Console.WriteLine(response["message"]);
+                }
+                else if (jsonResponse.TryGetValue("SessionID", out JToken token))
+                {
+                    SessionID = token.ToString();
+                    Console.WriteLine("Success!\n");
+                    return true;
+                }
             }
+            SessionID = "11111111";
             return false;
         }
-        private static bool CheckLogin()
+        private static bool CheckLogin(string SessionID)
         {
             using(HttpClient client = new HttpClient())
             {
