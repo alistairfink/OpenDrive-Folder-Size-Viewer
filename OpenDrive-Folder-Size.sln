@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2036
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenDrive-Folder-Size", "OpenDrive-Folder-Size\OpenDrive-Folder-Size.csproj", "{76571B30-BEFC-4106-AAD9-8E887846CA7B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{76571B30-BEFC-4106-AAD9-8E887846CA7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76571B30-BEFC-4106-AAD9-8E887846CA7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76571B30-BEFC-4106-AAD9-8E887846CA7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76571B30-BEFC-4106-AAD9-8E887846CA7B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E739A0EA-5418-44C0-A432-824B29D75861}
+	EndGlobalSection
+EndGlobal
