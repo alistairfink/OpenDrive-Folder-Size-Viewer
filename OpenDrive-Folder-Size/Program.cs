@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,24 +20,26 @@ namespace OpenDrive_Folder_Size
             }
             while(true)
             {
-                
+                Console.WriteLine("\nEnter Folder ID (0 for root folder): ");
+                string folderID = Console.ReadLine();
+                int totalFolderSize = GetFolder(folderID, 0m, SessionID);
             }
         }
-        private static bool Login(out string SessionID)
+        private static bool Login(out string sessionID)
         {
             using (HttpClient client = new HttpClient())
             {
                 string url = "https://dev.opendrive.com/api/v1/session/login.json";
                 Console.WriteLine("\nLogin With OpenDrive Account");
                 Console.Write("Username: ");
-                string username = System.Console.ReadLine();
+                string username = Console.ReadLine();
                 Console.Write("Password: ");
                 string pass = GetHiddenConsoleInput();
                 string jsonString = "{\"username\":\"" + username + "\",\"passwd\":\"" + pass + "\"}";
                 JObject json = JObject.Parse(jsonString);
                 var content = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
+                Console.WriteLine("\nLogging in...");
                 var result = client.PostAsync(url, content).Result;
-                Console.WriteLine("Logging in...");
                 string resultString = result.Content.ReadAsStringAsync().Result;
                 JObject jsonResponse = JObject.Parse(resultString);
                 if (jsonResponse.TryGetValue("error", out JToken response))
@@ -45,12 +48,12 @@ namespace OpenDrive_Folder_Size
                 }
                 else if (jsonResponse.TryGetValue("SessionID", out JToken token))
                 {
-                    SessionID = token.ToString();
+                    sessionID = token.ToString();
                     Console.WriteLine("Success!\n");
                     return true;
                 }
             }
-            SessionID = "11111111";
+            sessionID = "11111111";
             return false;
         }
         private static bool CheckLogin(string SessionID)
@@ -83,6 +86,31 @@ namespace OpenDrive_Folder_Size
                 else if (key.Key != ConsoleKey.Backspace) input.Append(key.KeyChar);
             }
             return input.ToString();
+        }
+        private static int GetFolder(string folderID, decimal size, string sessionID)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                string url = "https://dev.opendrive.com/api/v1/folder/list.json/" + sessionID + "/" + folderID;
+                var result = client.GetAsync(url).Result;
+
+                if (result.IsSuccessStatusCode)
+                {
+                    var response = result.Content.ReadAsStringAsync().Result;
+                    OpenDriveFolderList responseFolder = JsonConvert.DeserializeObject<OpenDriveFolderList>(response);
+                    foreach (File file in responseFolder.Files)
+                    {
+                        decimal fileSize = decimal.Parse(file.Size);
+                        fileSize /= 1024;
+                        //size += file.Size;
+                    }
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+                return 0;
         }
     }
 }
