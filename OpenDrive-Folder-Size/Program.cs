@@ -16,21 +16,23 @@ namespace OpenDrive_Folder_Size
             string SessionID = "11111111";
             if (!CheckLogin(SessionID))
             {
-                while (!Login(out SessionID)) { }
+                while (!Login(ref SessionID)) { }
             }
             while(true)
             {
                 Console.WriteLine("\nEnter Folder ID (0 for root folder): ");
                 string folderID = Console.ReadLine();
-                int totalFolderSize = GetFolder(folderID, 0m, SessionID);
+                Console.WriteLine("Scanning Folders...\n");
+                decimal totalFolderSize = GetFolder(folderID, 0, ref SessionID);
+                Console.WriteLine("Folder Size: " + string.Format("{0:F2}", totalFolderSize) + " MB");
             }
         }
-        private static bool Login(out string sessionID)
+        private static bool Login(ref string sessionID)
         {
             using (HttpClient client = new HttpClient())
             {
                 string url = "https://dev.opendrive.com/api/v1/session/login.json";
-                Console.WriteLine("\nLogin With OpenDrive Account");
+                Console.WriteLine("Login With OpenDrive Account");
                 Console.Write("Username: ");
                 string username = Console.ReadLine();
                 Console.Write("Password: ");
@@ -60,7 +62,6 @@ namespace OpenDrive_Folder_Size
         {
             using(HttpClient client = new HttpClient())
             {
-                Console.WriteLine("Checking Login...");
                 string url = "https://dev.opendrive.com/api/v1/session/exists.json";
                 string jsonString = "{\"session_id\":\"" + SessionID + "\"}";
                 JObject json = JObject.Parse(jsonString);
@@ -87,30 +88,51 @@ namespace OpenDrive_Folder_Size
             }
             return input.ToString();
         }
-        private static int GetFolder(string folderID, decimal size, string sessionID)
+        private static decimal GetFolder(string folderID, int indent, ref string sessionID)
         {
+            decimal size = 0m;
+            if(!CheckLogin(sessionID))
+            {
+                Console.WriteLine("ERROR: Session Expired. Please Re-Enter Credentials");
+                Login(ref sessionID);
+            }
             using (HttpClient client = new HttpClient())
             {
                 string url = "https://dev.opendrive.com/api/v1/folder/list.json/" + sessionID + "/" + folderID;
                 var result = client.GetAsync(url).Result;
-
                 if (result.IsSuccessStatusCode)
                 {
                     var response = result.Content.ReadAsStringAsync().Result;
                     OpenDriveFolderList responseFolder = JsonConvert.DeserializeObject<OpenDriveFolderList>(response);
+                    Console.WriteLine(GetIndent(indent) + responseFolder.Name);
                     foreach (File file in responseFolder.Files)
                     {
                         decimal fileSize = decimal.Parse(file.Size);
-                        fileSize /= 1024;
-                        //size += file.Size;
+                        fileSize /= 1048576;
+                        size += fileSize;
                     }
+                    foreach (Folder folder in responseFolder.Folders)
+                    {
+                        size += GetFolder(folder.FolderID, indent+1, ref sessionID);
+                    }
+                    return size;
                 }
-                else
-                {
-                    return 0;
-                }
-            }
+                Console.WriteLine("ERROR: Server could not be reached.");
                 return 0;
+            }
+        }
+        private static string GetIndent(int indent)
+        {
+            string returnString = indent > 1 ? "|" : "";
+            for(int i = 1; i<indent; i++)
+            {
+                returnString += "  ";
+            }
+            if (indent > 0)
+            {
+                returnString += "|-- ";
+            }
+            return returnString;
         }
     }
 }
