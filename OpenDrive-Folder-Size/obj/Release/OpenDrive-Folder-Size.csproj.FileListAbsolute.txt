@@ -1,0 +1,9 @@
+C:\Users\Alistair Fink\Desktop\Source\OpenDrive-Folder-Size-Viewer\OpenDrive-Folder-Size\bin\Release\OpenDrive-Folder-Size.exe.config
+C:\Users\Alistair Fink\Desktop\Source\OpenDrive-Folder-Size-Viewer\OpenDrive-Folder-Size\bin\Release\OpenDrive-Folder-Size.exe
+C:\Users\Alistair Fink\Desktop\Source\OpenDrive-Folder-Size-Viewer\OpenDrive-Folder-Size\bin\Release\OpenDrive-Folder-Size.pdb
+C:\Users\Alistair Fink\Desktop\Source\OpenDrive-Folder-Size-Viewer\OpenDrive-Folder-Size\bin\Release\Newtonsoft.Json.dll
+C:\Users\Alistair Fink\Desktop\Source\OpenDrive-Folder-Size-Viewer\OpenDrive-Folder-Size\bin\Release\Newtonsoft.Json.xml
+C:\Users\Alistair Fink\Desktop\Source\OpenDrive-Folder-Size-Viewer\OpenDrive-Folder-Size\obj\Release\OpenDrive-Folder-Size.csproj.CoreCompileInputs.cache
+C:\Users\Alistair Fink\Desktop\Source\OpenDrive-Folder-Size-Viewer\OpenDrive-Folder-Size\obj\Release\OpenDrive-Folder-Size.csproj.CopyComplete
+C:\Users\Alistair Fink\Desktop\Source\OpenDrive-Folder-Size-Viewer\OpenDrive-Folder-Size\obj\Release\OpenDrive-Folder-Size.exe
+C:\Users\Alistair Fink\Desktop\Source\OpenDrive-Folder-Size-Viewer\OpenDrive-Folder-Size\obj\Release\OpenDrive-Folder-Size.pdb
