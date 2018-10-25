@@ -7,3 +7,13 @@ C:\Users\Alistair Fink\Desktop\Source\OpenDrive-Folder-Size-Viewer\OpenDrive-Fol
 C:\Users\Alistair Fink\Desktop\Source\OpenDrive-Folder-Size-Viewer\OpenDrive-Folder-Size\obj\Release\OpenDrive-Folder-Size.csproj.CopyComplete
 C:\Users\Alistair Fink\Desktop\Source\OpenDrive-Folder-Size-Viewer\OpenDrive-Folder-Size\obj\Release\OpenDrive-Folder-Size.exe
 C:\Users\Alistair Fink\Desktop\Source\OpenDrive-Folder-Size-Viewer\OpenDrive-Folder-Size\obj\Release\OpenDrive-Folder-Size.pdb
+E:\AppDev\Github\OpenDrive-Folder-Size-Viewer\OpenDrive-Folder-Size\bin\Release\OpenDrive-Folder-Size.exe.config
+E:\AppDev\Github\OpenDrive-Folder-Size-Viewer\OpenDrive-Folder-Size\bin\Release\OpenDrive-Folder-Size.exe
+E:\AppDev\Github\OpenDrive-Folder-Size-Viewer\OpenDrive-Folder-Size\bin\Release\OpenDrive-Folder-Size.pdb
+E:\AppDev\Github\OpenDrive-Folder-Size-Viewer\OpenDrive-Folder-Size\bin\Release\Newtonsoft.Json.dll
+E:\AppDev\Github\OpenDrive-Folder-Size-Viewer\OpenDrive-Folder-Size\bin\Release\Newtonsoft.Json.xml
+E:\AppDev\Github\OpenDrive-Folder-Size-Viewer\OpenDrive-Folder-Size\obj\Release\OpenDrive-Folder-Size.csprojAssemblyReference.cache
+E:\AppDev\Github\OpenDrive-Folder-Size-Viewer\OpenDrive-Folder-Size\obj\Release\OpenDrive-Folder-Size.csproj.CoreCompileInputs.cache
+E:\AppDev\Github\OpenDrive-Folder-Size-Viewer\OpenDrive-Folder-Size\obj\Release\OpenDrive-Folder-Size.csproj.CopyComplete
+E:\AppDev\Github\OpenDrive-Folder-Size-Viewer\OpenDrive-Folder-Size\obj\Release\OpenDrive-Folder-Size.exe
+E:\AppDev\Github\OpenDrive-Folder-Size-Viewer\OpenDrive-Folder-Size\obj\Release\OpenDrive-Folder-Size.pdb

@@ -38,7 +38,16 @@ namespace OpenDrive_Folder_Size
                 JObject json = JObject.Parse(jsonString);
                 var content = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
                 Console.WriteLine("\nLogging in...");
-                var result = client.PostAsync(url, content).Result;
+                HttpResponseMessage result = null;
+                try
+                {
+                    result = client.PostAsync(url, content).Result;
+                }
+                catch
+                {
+                    Console.WriteLine("Can't Connect to Server");
+                    return false;
+                }
                 string resultString = result.Content.ReadAsStringAsync().Result;
                 JObject jsonResponse = JObject.Parse(resultString);
                 if (jsonResponse.TryGetValue("error", out JToken response))
@@ -63,7 +72,16 @@ namespace OpenDrive_Folder_Size
                 string jsonString = "{\"session_id\":\"" + SessionID + "\"}";
                 JObject json = JObject.Parse(jsonString);
                 var content = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
-                var result = client.PostAsync(url, content).Result;
+                HttpResponseMessage result = null;
+                try
+                {
+                    result = client.PostAsync(url, content).Result;
+                }
+                catch
+                {
+                    Console.WriteLine("Can't Connect to Server");
+                    return false;
+                }
                 string resultString = result.Content.ReadAsStringAsync().Result;
                 JObject jsonResponse = JObject.Parse(resultString);
                 if (jsonResponse.TryGetValue("result", out JToken response))
@@ -96,7 +114,18 @@ namespace OpenDrive_Folder_Size
             using (HttpClient client = new HttpClient())
             {
                 string url = "https://dev.opendrive.com/api/v1/folder/list.json/" + sessionID + "/" + folderID;
-                var result = client.GetAsync(url).Result;
+                HttpResponseMessage result = null;
+                while (result == null)
+                {
+                    try
+                    {
+                        result = client.GetAsync(url).Result;
+                    }
+                    catch
+                    {
+                        System.Threading.Thread.Sleep(5000);
+                    }
+                }
                 if (result.IsSuccessStatusCode)
                 {
                     var response = result.Content.ReadAsStringAsync().Result;
